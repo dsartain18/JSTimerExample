@@ -3,10 +3,11 @@ var counter;
 
 // Ex: StartTimer(5, 'm', 'timer') for Five Minutes
 // Ex: StartTimer(5, 'h', 'timer') for Five Hours
-function StartCountdownTimer(timeDistance, timeMeasurement, timerDivId) {
+function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
 
     // Add timeDistance in specified measurement to current time
     var countDownDate = moment().add(timeDistance, timeMeasurement).toDate();
+    var timeRemaining;
 
     counter = setInterval(function () {
         
@@ -17,10 +18,11 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerDivId) {
         var distance = countDownDate - now;
 
         // Calculate minutes and seconds from current time to countDownDate
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        $("#"+timerDivId).text(minutes + ":" + seconds);
+        timerCallback(hours, minutes, seconds);
 
         // If the count down is finished clear the counter interval.
         if (distance < 0) {
@@ -29,9 +31,8 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerDivId) {
     }, 1000);
 }
 
-function StopCountdownTimer(timerDivId) {
-    clearInterval(counter);
-    $("#"+timerDivId).text("5:00");
+function StopCountdownTimer() {
+    clearInterval(counter);    
 }
 
 
