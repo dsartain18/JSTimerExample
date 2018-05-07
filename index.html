@@ -21,14 +21,27 @@
 <!-- Page script content for jQuery event handling-->
 <script type="text/javascript">
     $("document").ready(function () {
+
+        // Callback function to set timer text values
+        function timerCallback(hours, minutes, seconds){
+            if (hours && hours >=0)
+            {
+                $("#timer").text(hours + ":" + minutes + ":" + seconds);
+            }
+            else{
+                $("#timer").text(minutes + ":" + seconds);
+            }
+        };
+
         // Start timer on button click
         $("#StartCountdownBtn").on("click", function () {
-            StartCountdownTimer(5, 'm', 'timer');
+           StartCountdownTimer(5, 'm', timerCallback);           
         })
     });
 
     // Stop timer on button click
     $("#StopCountdownbtn").on("click", function () {
-        StopCountdownTimer('timer');
-    });
+        StopCountdownTimer();
+        $("#timer").text("5:00");
+    });    
 </script>
