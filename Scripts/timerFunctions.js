@@ -1,6 +1,7 @@
 
 var counter;
 
+// NOTE: Does not support days at this time
 // Ex: StartTimer(5, 'm', 'timer') for Five Minutes
 // Ex: StartTimer(5, 'h', 'timer') for Five Hours
 function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
@@ -10,7 +11,7 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
     var timeRemaining;
 
     counter = setInterval(function () {
-        
+
         // Get Current Time
         var now = new Date().getTime();
 
@@ -22,6 +23,14 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        if (minutes < 10 && hours && hours > 0) {
+            minutes = "0" + minutes;
+        }
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
         timerCallback(hours, minutes, seconds);
 
         // If the count down is finished clear the counter interval.
@@ -32,7 +41,7 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
 }
 
 function StopCountdownTimer() {
-    clearInterval(counter);    
+    clearInterval(counter);
 }
 
 
