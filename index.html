@@ -1,47 +1,75 @@
-<link rel="stylesheet" href="Content/style.css" />
+<!DocType <!DOCTYPE html>
+<html>
 
-<input type="button" id="StartCountdownBtn" value="Start Countdown" />
-<input type="button" id="StopCountdownbtn" value="Stop Countdown" />
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JavaScript Countdown Timer Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Include Bootstrap styles-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 
-<div id="timer" class="timer">5:00</div>
+    <!--Include custom styles-->
+    <link rel="stylesheet" href="Content/style.css" />
 
+</head>
 
-<!--Include jQuery-->
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<body>
+    <main role="main">
+        <section role="region" class="col-sm-2 col-sm-offset-5">
+            <div>
+                <label id="timer" class="timer">5:00</label>
+            </div>
 
-<!--Include Moment JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+            <input class="btn button startButton" type="button" id="StartCountdownBtn" value="Start Countdown" />
+            <input class="btn button stopButton" type="button" id="StopCountdownbtn" value="Stop Countdown" />
+        </section>
+    </main>
 
-<!--Include Moment JS Locale (Not 100% Sure I need this yet)-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/es-us.js"></script>
+    <!--Include Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
-<!--Include local script file with counter functions-->
-<script src="Scripts/timerFunctions.js"></script>
+    <!--Include jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-<!-- Page script content for jQuery event handling-->
-<script type="text/javascript">
-    $("document").ready(function () {
+    <!--Include Moment JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
 
-        // Callback function to set timer text values
-        function timerCallback(hours, minutes, seconds){
-            if (hours && hours >=0)
-            {
-                $("#timer").text(hours + ":" + minutes + ":" + seconds);
-            }
-            else{
-                $("#timer").text(minutes + ":" + seconds);
-            }
-        };
+    <!--Include Moment JS Locale (Not 100% Sure I need this yet)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/es-us.js"></script>
 
-        // Start timer on button click
-        $("#StartCountdownBtn").on("click", function () {
-           StartCountdownTimer(5, 'm', timerCallback);           
-        })
-    });
+    <!--Include local script file with counter functions-->
+    <script src="Scripts/timerFunctions.js"></script>
 
-    // Stop timer on button click
-    $("#StopCountdownbtn").on("click", function () {
-        StopCountdownTimer();
-        $("#timer").text("5:00");
-    });    
-</script>
+    <!-- Page script content for jQuery event handling-->
+    <script type="text/javascript">
+        $("document").ready(function () {
+
+            // Callback function to set timer text values
+            function timerCallback(hours, minutes, seconds) {
+                if (hours && hours >= 0) {
+                    $("#timer").text(hours + ":" + minutes + ":" + seconds);
+                }
+                else {
+                    $("#timer").text(minutes + ":" + seconds);
+                }
+            };
+
+            // Start timer on button click
+            $("#StartCountdownBtn").on("click", function () {
+                StartCountdownTimer(5, 'm', timerCallback);
+            })
+        });
+
+        // Stop timer on button click
+        $("#StopCountdownbtn").on("click", function () {
+            StopCountdownTimer();
+            $("#timer").text("5:00");
+        });    
+    </script>
+
+</body>
+
+</html>
