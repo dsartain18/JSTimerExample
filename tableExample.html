@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JS Timer Example in Tables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/style.css" />
+</head>
+
+<body>
+    <table id="idOfTable" style="border: 1px black solid">
+        <tr style="border:1px solid black">
+            <td style="border:1px solid black" data-timerstart="06/11/2018 9:12:00 AM" class="timerCell">
+
+            </td>
+            <td style="border:1px solid black" data-timerstart="06/11/2018 9:11:00 AM" class="timerCell">
+
+            </td>
+        </tr>
+        <tr style="border:1px solid black">
+            <td style="border:1px solid black" data-timerstart="06/11/2018 9:12:00 AM" class="timerCell">
+
+            </td>
+            <td style="border:1px solid black" data-timerstart="06/11/2018 9:13:00 AM" class="timerCell">
+
+            </td>
+        </tr>
+    </table>
+
+
+    <!--Include jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <!--Include Moment JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+
+    <!--Include Moment JS Locale (Not 100% Sure I need this yet)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/es-us.js"></script>
+
+    <!--Include local script file with counter functions-->
+    <script src="Scripts/timerFunctions.js"></script>
+
+    <!-- Page script content for jQuery event handling-->
+    <script type="text/javascript">
+        $("document").ready(function () {
+
+            // Callback function to set timer text values
+            function timerCallback(hours, minutes, seconds, element) {
+                if (hours && hours >= 0) {
+                    console.log(hours + ":" + minutes + ":" + seconds);
+                    element.text(hours + ":" + minutes + ":" + seconds);
+                }
+                else {
+                    element.text(minutes + ":" + seconds);
+                }
+            };
+
+            $(".timerCell").each(function (idx) {   
+                
+                let element = $(this);
+
+                let startTime = this.dataset.timerstart
+
+                //console.log(startTime);
+
+                // Start timer on button click        
+                StartCountdownTimerWithElement(startTime, timerCallback, element);
+            });
+        });
+
+        // Stop timer on button click
+        $("#StopCountdownbtn").on("click", function () {
+            StopCountdownTimer();
+            $("#timer").text("5:00");
+        });    
+    </script>
+
+</body>
+
+</html>

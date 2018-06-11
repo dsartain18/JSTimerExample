@@ -40,6 +40,45 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
     }, 1000);
 }
 
+function StartCountdownTimerWithElement(startTime, timerCallback, element) {
+
+    // Add timeDistance in specified measurement to current time
+    var countDownDate = moment(startTime).add(5, 'm').toDate();
+
+    console.log(countDownDate);
+
+    var timeRemaining;
+
+    counter = setInterval(function () {
+
+        // Get Current Time
+        var now = new Date().getTime();
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Calculate minutes and seconds from current time to countDownDate
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (minutes < 10 && hours && hours > 0) {
+            minutes = "0" + minutes;
+        }
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
+        timerCallback(hours, minutes, seconds, element);
+
+        // If the count down is finished clear the counter interval.
+        if (distance < 0) {
+            clearInterval(counter);
+        }
+    }, 1000);
+}
+
 function StopCountdownTimer() {
     clearInterval(counter);
 }
