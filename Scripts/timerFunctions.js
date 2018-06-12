@@ -31,17 +31,19 @@ function StartCountdownTimer(timeDistance, timeMeasurement, timerCallback) {
             seconds = "0" + seconds;
         }
 
-        timerCallback(hours, minutes, seconds);
-
         // If the count down is finished clear the counter interval.
         if (distance < 0) {
             clearInterval(counter);
         }
+        else {
+            timerCallback(hours, minutes, seconds);
+        }
+
+
+
     }, 1000);
 }
 
 function StopCountdownTimer() {
     clearInterval(counter);
-}
-
-
+};
